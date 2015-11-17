@@ -4,7 +4,7 @@ public class Bill {
 	int bird = 0;
 	for (int l=0; l <100000; l++) {
 	    
-	    for (int m = 0; m < 10000; m++) {
+	    for (int m = 0; m < 100; m++) {
 		bird += (l + m + 2);
 	    }
 
@@ -15,8 +15,8 @@ public class Bill {
     
     public static int noogie() {
 	int bird = 0;
-	for (int l=0; l <100000; l++) {
-	    for (int m = 0; m < 10000; m++) {
+	for (int l=0; l <1000; l++) {
+	    for (int m = 0; m < 100; m++) {
 		bird += (l + m);
 	    }
 	}
@@ -32,18 +32,20 @@ public class Bill {
 	}
 	
 	int bird = 0;
-	for (int j = 0; j < 100000; j++) {
+	for (int j = 0; j < 10000; j++) {
 	    bird += j + coogie() + noogie();
+	    if (j % 10 == 0) {
+		System.out.print(".");
+	    }
 	}
-
-	System.out.println("Start: " + bird);
-
 	
-	// FileName fn = new FileName(args[0]);
+	System.out.println("\nStart: " + bird);
 
-	// SomethingDoer sd = new SomethingDoer(fn);
+	FileName fn = new FileName(args[0]);
 
-	// sd.doIt(fn);
+	SomethingDoer sd = new SomethingDoer(fn);
+
+	sd.doIt(fn);
 
 	
     }

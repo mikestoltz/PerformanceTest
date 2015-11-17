@@ -7,9 +7,11 @@ public class StrategyOne implements StrategyInterface {
 	    for (long k = 0; k < 100000000; k++) {
 		bird += 2;
 	    }
+	    System.out.print(".");
 	    toReturn += (byte) s.charAt(j);
 	    toReturn += BillUtil.value();
 	}
+	System.out.println("... done!");
 	if (s.length() == 0) {
 	    return 0;
 	} else {
