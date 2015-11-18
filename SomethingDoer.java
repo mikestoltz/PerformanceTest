@@ -3,76 +3,57 @@ import java.io.*;
 
 public class SomethingDoer {
 
-    FileName _fileName;
+  FileName _fileName;
 
-    public SomethingDoer(FileName f) {
-	_fileName = f;
-    }
+  public SomethingDoer(FileName f) {
+		_fileName = f;
+  }
+  
+  private ArrayList<String> getNewArrayList() {
+		ArrayList<String> toReturn = new ArrayList<String>();
+		return toReturn;
+  }
+
+	private ArrayList<String> clearOutArrayList(ArrayList<String> arr) {
+		ArrayList<String> toReturn = new ArrayList<String>();
+		return toReturn;
+	}
+
+  public String[] convertToStringArray(Object[] objs) {
+		String[] toReturn = new String[objs.length];
+
+		int count = 0;
+		for (Object obj : objs) {
+		    toReturn[count++] = (String) obj;
+		}
+		
+		return toReturn;
+  }
     
-    private ArrayList<String> getNewArrayList() {
-	ArrayList<String> toReturn = new ArrayList<String>();
-	for (int j = 0; j < 400; j++) {
-	    toReturn.add("" + j);
-	}
-	return toReturn;
-    }
+  public void doIt(FileName f) {
+		_fileName = f;
+		
+		ArrayList<String> strings = getNewArrayList();
 
-    private ArrayList<String> clearOutArrayList(ArrayList<String> arr) {
-	ArrayList<String> toReturn = new ArrayList<String>();
-	for (String a : arr) {
-	    toReturn.add(a);
-	}
-	int count = arr.size();
-	for (int j = 0; j < count; j++) {
-	    toReturn.remove(0);
-	}
-	return toReturn;
-	
-    }
+		FileAccess fa = new FileAccess();
+		strings = fa.readFile(f.name);
 
-    public String[] convertToStringArray(Object[] objs) {
-	ArrayList<String> strings = getNewArrayList();
-	strings = clearOutArrayList(strings);
-	for (Object obj : objs) {
-	    String x = (String) obj;
-	    strings.add(x);
-	}
-	String[] toReturn = new String[strings.size()];
+		DataCalculator dc = new DataCalculator();
 
-	int count = 0;
-	for (String s : strings) {
-	    toReturn[count++] = s;
-	}
-	
-	return toReturn;
-    }
-    
-    public void doIt(FileName f) {
-	_fileName = f;
-	
-	ArrayList<String> strings = getNewArrayList();
+		Object[] strings2 = strings.toArray();
 
-	strings = clearOutArrayList(strings);
+		String[] strings3 = convertToStringArray(strings2);
+		
+		int[] calculated = dc.calculate((new StrategyOne()), strings3);
 
-	FileAccess fa = new FileAccess();
-	strings = fa.readFile(f.name);
+		int total = 0;
+		for (int line : calculated) {
+		    total += line;
+		}
 
-	DataCalculator dc = new DataCalculator();
+		OutputControl oc = new OutputControl(System.out);
+		oc.print("" + (total % 100));
 
-	Object[] strings2 = strings.toArray();
-
-	String[] strings3 = convertToStringArray(strings2);
-	
-	int[] calculated = dc.calculate((new StrategyOne()), strings3);
-
-	int total = 0;
-	for (int line : calculated) {
-	    total += line;
-	}
-
-	OutputControl oc = new OutputControl(System.out);
-	oc.print("" + (total % 100));
-
-    }
+  }
     
 }
